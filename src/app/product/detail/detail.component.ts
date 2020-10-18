@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor() {
   }
-
+  title= 'Chi tiết sản phẩm';
+  ngOnInit() {  
+  }
+  
+  
 }
