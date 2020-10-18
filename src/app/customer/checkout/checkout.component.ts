@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class CheckoutComponent implements OnInit {
 
   constructor() { }
-
+  title = 'Thanh toán';
   ngOnInit(): void {
   }
 

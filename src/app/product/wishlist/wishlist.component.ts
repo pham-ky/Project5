@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class WishlistComponent implements OnInit {
 
   constructor() { }
-
+  title = 'Danh sách yêu thích';
   ngOnInit(): void {
   }
 

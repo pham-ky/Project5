@@ -12,8 +12,12 @@ export const prodRoute: Routes = [
     component: ListComponent,
   },
   {
-    path: 'chitiet/:id',
+    path: 'detail/:id',
     component: DetailComponent,
+  },
+  {
+    path: 'wishlist',
+    component: WishlistComponent,
   }
 ];
 

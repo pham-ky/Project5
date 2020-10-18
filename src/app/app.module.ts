@@ -5,6 +5,7 @@ import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
 import { ProductModule } from './product/product.module';
+import { CustomerModule } from './customer/customer.module';
 
 enableProdMode();
 
@@ -17,7 +18,8 @@ enableProdMode();
     AppRoutingModule,
     SharedModule,
     HomeModule,
-    ProductModule
+    ProductModule,
+    CustomerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

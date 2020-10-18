@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
 
   constructor() { }
-
+  title = 'Đăng nhập/Đăng ký';
   ngOnInit(): void {
   }
 

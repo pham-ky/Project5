@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class ListCartComponent implements OnInit {
 
   constructor() { }
-
+  title = 'Giỏ hàng';
   ngOnInit(): void {
   }
 
