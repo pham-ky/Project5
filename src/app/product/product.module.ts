@@ -4,6 +4,7 @@ import { ListComponent } from './list/list.component';
 import { DetailComponent } from './detail/detail.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 
 export const prodRoute: Routes = [
@@ -27,6 +28,7 @@ export const prodRoute: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(prodRoute),
+    HttpClientModule
   ]
 })
 export class ProductModule { }
