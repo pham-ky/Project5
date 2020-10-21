@@ -5,6 +5,8 @@ import { DetailComponent } from './detail/detail.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 export const prodRoute: Routes = [
@@ -28,7 +30,10 @@ export const prodRoute: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(prodRoute),
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    NgbModule
+    
   ]
 })
 export class ProductModule { }

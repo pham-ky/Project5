@@ -14,13 +14,12 @@
                     <div class="product-sorting-wrapper">
                         <div class="product-shorting shorting-style">
                             <label>View :</label>
-                            <!-- <select name="orderby" [(ngModel)]="pageSize" (ngModelChange)="loadPage(1)">
-                                <option selected value="3">3</option>
-                                <option  value="5">5</option>
-                                <option  value="10">10</option>
+                            <select name="orderby" [(ngModel)]="pageSize" (ngModelChange)="loadPage(1)">
+                                <option value="3">3</option>
+                                <option selected value="6">6</option>
+                                <option value="9">9</option>
                                 <option value="15">15</option>
-                                <option value="20">20</option>
-                            </select> -->
+                            </select>
                         </div>
                         <div class="product-show shorting-style">
                             <label>Sort by :</label>
@@ -36,10 +35,10 @@
                     <div class="tab-content jump">
                         <div id="shop-1" class="tab-pane">
                             <div class="row">
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12" *ngFor="let prod of products">
+                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12" *ngFor="let prod of list">
                                     <div class="single-product-wrap mb-35">
                                         <div class="product-img product-img-zoom mb-15">
-                                            <a [routerLink]="['/product/detail/',prod.productId]" >
+                                            <a [routerLink]="['/product/detail/',prod.productId]">
                                                 <img src="assets/images/product/{{prod.productImage}}" alt="">
                                             </a>
                                             <div class="product-action-2 tooltip-style-2">
@@ -67,11 +66,12 @@
                         </div>
                         <div id="shop-2" class="tab-pane active">
                             <div class="shop-list-wrap mb-30">
-                                <div class="row" *ngFor="let pro of products">
+                                <div class="row" *ngFor="let pro of list">
                                     <div class="col-xl-4 col-lg-5 col-md-6 col-sm-6">
                                         <div class="product-list-img">
                                             <a routerLink="/product/detail/{{pro.productId}}">
-                                                <img src="assets/images/product/{{pro.productImage}}" alt="Product Style">
+                                                <img src="assets/images/product/{{pro.productImage}}"
+                                                    alt="Product Style">
                                             </a>
                                         </div>
                                     </div>
@@ -84,8 +84,9 @@
                                             </div>
                                             <p>Đây sẽ là phần mô tả sản phẩm</p>
                                             <div class="product-list-action">
-                                                
-                                                <button title="Add To Cart" (click)="addToCart(pro)"><i class="icon-basket-loaded"></i></button>
+
+                                                <button title="Add To Cart" (click)="addToCart(pro)"><i
+                                                        class="icon-basket-loaded"></i></button>
                                                 <button title="Wishlist"><i class="icon-heart"></i></button>
                                                 <!-- <button title="Compare"><i class="icon-refresh"></i></button> -->
                                             </div>
@@ -95,13 +96,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="pro-pagination-style text-center mt-10">
-                        <ul>
+                    <div class="shop_toolbar t_bottom">
+                        <ngb-pagination [collectionSize]="totalItems" [pageSize]="pageSize" [(page)]="page"
+                            [maxSize]="10" [rotate]="true" (pageChange)="loadPage($event)">
+                        </ngb-pagination>
+                        <!-- <ul>
                             <li><a class="prev" href="#"><i class="icon-arrow-left"></i></a></li>
                             <li><a class="active" href="#">1</a></li>
                             <li><a href="#">2</a></li>
                             <li><a class="next" href="#"><i class="icon-arrow-right"></i></a></li>
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
             </div>
@@ -119,10 +123,13 @@
                         </div>
                     </div>
                     <div class="sidebar-widget shop-sidebar-border mb-35 pt-40">
-                        <h4 class="sidebar-widget-title" style="font-family: 'Montserrat', sans-serif;">Loại sản phẩm</h4>
+                        <h4 class="sidebar-widget-title" style="font-family: 'Montserrat', sans-serif;">Loại sản phẩm
+                        </h4>
                         <div class="shop-catigory">
                             <ul *ngFor="let cate of categories">
-                                <li><a routerLink="/product/{{cate.productCategoryId}}" style="font-size: 17px;margin: 10px 0;font-family: 'Montserrat', sans-serif;">{{cate.productCategoryName}}</a></li>
+                                <li><a routerLink="/product/{{cate.productCategoryId}}"
+                                        style="font-size: 17px;margin: 10px 0;font-family: 'Montserrat', sans-serif;">{{cate.productCategoryName}}</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -130,14 +137,16 @@
                         <h4 class="sidebar-widget-title" style="font-family: 'Montserrat', sans-serif;">Thương hiệu</h4>
                         <div class="shop-catigory">
                             <ul *ngFor="let supp of suppliers">
-                                <li><a routerLink="/product/{{supp.supplierId}}" style="font-size: 17px;margin: 10px 0;font-family: 'Montserrat', sans-serif;">{{supp.supplierName}}</a></li>
+                                <li><a routerLink="/product/{{supp.supplierId}}"
+                                        style="font-size: 17px;margin: 10px 0;font-family: 'Montserrat', sans-serif;">{{supp.supplierName}}</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
                     <div class="sidebar-widget shop-sidebar-border mb-40 pt-40">
                         <h4 class="sidebar-widget-title">Price Filter </h4>
                         <div class="price-filter">
-                            <span>Range:  $100.00 - 1.300.00 </span>
+                            <span>Range: $100.00 - 1.300.00 </span>
                             <div id="slider-range"></div>
                             <div class="price-slider-amount">
                                 <div class="label-input">
