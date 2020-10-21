@@ -6,6 +6,8 @@ import { SupplierService } from '../../lib/supplier.service';
 import { first } from 'rxjs/operators';
 import { BaseComponent } from 'src/app/lib/base-component';
 
+declare let alertify: any;
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -34,8 +36,23 @@ export class ListComponent extends BaseComponent  implements OnInit {
       .pipe(first())
       .subscribe((products) =>{
         // console.log(products);
+        // this.page=1;
+        // this.pageSize=6;
         this.products =products;
+        // if(Object.keys(products).length%this.pageSize!=0)
+        //   this.totalItems =Math.floor(Object.keys(products).length/this.pageSize)+1;
+        // else
+        //   this.totalItems = Object.keys(products).length/this.pageSize;
+        // var skip = (this.totalItems-1)*this.pageSize;
+        // this.products.find({})
+        // .skip(skip)
+        // .limit(this.pageSize)
+        // .then(products=>{
+        //   this.products=products;
+        // });
+        // console.log(this.totalItems);
     });
+
     this.categoryService
       .Get()
       .pipe(first())
@@ -50,6 +67,11 @@ export class ListComponent extends BaseComponent  implements OnInit {
         // console.log(suppliers);
         this.suppliers =suppliers;
     });
+  }
+
+  addToCart(it) { 
+    this._cart.addToCart(it);
+    alertify.success('Thêm thành công!'); 
   }
 
 }

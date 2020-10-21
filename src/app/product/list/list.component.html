@@ -77,14 +77,15 @@
                                     </div>
                                     <div class="col-xl-8 col-lg-7 col-md-6 col-sm-6">
                                         <div class="shop-list-content">
-                                            <h3><a routerLink="detail/1">{{pro.productName}}</a></h3>
+                                            <h3><a routerLink="detail/{{pro.productId}}">{{pro.productName}}</a></h3>
                                             <div class="pro-list-price">
                                                 <span class="new-price">{{ pro.productPrice | currency: "VND" }}</span>
                                                 <!-- <span class="old-price">$45.80</span> -->
                                             </div>
                                             <p>Đây sẽ là phần mô tả sản phẩm</p>
                                             <div class="product-list-action">
-                                                <button title="Add To Cart"><i class="icon-basket-loaded"></i></button>
+                                                
+                                                <button title="Add To Cart" (click)="addToCart(pro)"><i class="icon-basket-loaded"></i></button>
                                                 <button title="Wishlist"><i class="icon-heart"></i></button>
                                                 <!-- <button title="Compare"><i class="icon-refresh"></i></button> -->
                                             </div>
@@ -121,7 +122,7 @@
                         <h4 class="sidebar-widget-title" style="font-family: 'Montserrat', sans-serif;">Loại sản phẩm</h4>
                         <div class="shop-catigory">
                             <ul *ngFor="let cate of categories">
-                                <li><a routerLink="/" style="font-size: 17px;margin: 10px 0;font-family: 'Montserrat', sans-serif;">{{cate.productCategoryName}}</a></li>
+                                <li><a routerLink="/product/{{cate.productCategoryId}}" style="font-size: 17px;margin: 10px 0;font-family: 'Montserrat', sans-serif;">{{cate.productCategoryName}}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -129,7 +130,7 @@
                         <h4 class="sidebar-widget-title" style="font-family: 'Montserrat', sans-serif;">Thương hiệu</h4>
                         <div class="shop-catigory">
                             <ul *ngFor="let supp of suppliers">
-                                <li><a routerLink="/" style="font-size: 17px;margin: 10px 0;font-family: 'Montserrat', sans-serif;">{{supp.supplierName}}</a></li>
+                                <li><a routerLink="/product/{{supp.supplierId}}" style="font-size: 17px;margin: 10px 0;font-family: 'Montserrat', sans-serif;">{{supp.supplierName}}</a></li>
                             </ul>
                         </div>
                     </div>

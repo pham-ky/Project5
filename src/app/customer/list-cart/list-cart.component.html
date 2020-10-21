@@ -12,7 +12,7 @@
     </div>
 </div>
 <div class="cart-main-area pt-115 pb-120">
-    <div class="container">
+    <div class="container" *ngIf="items.length>0">
         <h3 class="cart-page-title">Your cart items</h3>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
@@ -21,63 +21,32 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Image</th>
-                                    <th>Product Name</th>
-                                    <th>Until Price</th>
-                                    <th>Qty</th>
-                                    <th>Subtotal</th>
-                                    <th>action</th>
+                                    <th>Hình ảnh</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Giá</th>
+                                    <th>Số lượng</th>
+                                    <th>Thành tiền</th>
+                                    <th>Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr *ngFor="let item of items">
                                     <td class="product-thumbnail">
-                                        <a href="#"><img src="assets/images/cart/cart-1.jpg" alt=""></a>
+                                        <a href="#"><img width="100px" src="assets/images/product/{{item.productImage}}" alt=""></a>
                                     </td>
-                                    <td class="product-name"><a href="#">Simple Black T-Shirt</a></td>
-                                    <td class="product-price-cart"><span class="amount">$260.00</span></td>
+                                    <td class="product-name"><a href="#">{{item.productName}}</a></td>
+                                    <td class="product-price-cart"><span class="amount">{{item.productPrice | currency: "VND"}}</span></td>
                                     <td class="product-quantity pro-details-quality">
                                         <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1">
+                                            <input #inp min="1" max="{{item.productQuantity - item.quantity}}" (change)="addQty(item,inp.value)" [value]="item.quantity" class="cart-plus-minus-box" type="text" name="qtybutton" >
                                         </div>
                                     </td>
-                                    <td class="product-subtotal">$110.00</td>
+                                    <td class="product-subtotal">{{item.money | currency: "VND"}}</td>
                                     <td class="product-remove">
-                                        <a href="#"><i class="icon_close"></i></a>
+                                        <a (click)="clearItemCart(item.productId)"><i class="icon_close"></i></a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="product-thumbnail">
-                                        <a href="#"><img src="assets/images/cart/cart-2.jpg" alt=""></a>
-                                    </td>
-                                    <td class="product-name"><a href="#">Norda Simple Backpack</a></td>
-                                    <td class="product-price-cart"><span class="amount">$150.00</span></td>
-                                    <td class="product-quantity pro-details-quality">
-                                        <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1">
-                                        </div>
-                                    </td>
-                                    <td class="product-subtotal">$150.00</td>
-                                    <td class="product-remove">
-                                        <a href="#"><i class="icon_close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="product-thumbnail">
-                                        <a href="#"><img src="assets/images/cart/cart-1.jpg" alt=""></a>
-                                    </td>
-                                    <td class="product-name"><a href="#">Simple Black T-Shirt </a></td>
-                                    <td class="product-price-cart"><span class="amount">$170.00</span></td>
-                                    <td class="product-quantity pro-details-quality">
-                                        <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" type="text" name="qtybutton" value="2">
-                                        </div>
-                                    </td>
-                                    <td class="product-subtotal">$170.00</td>
-                                    <td class="product-remove">
-                                        <a href="#"><i class="icon_close"></i></a>
-                                    </td>
-                                </tr>
+                                
                             </tbody>
                         </table>
                     </div>
@@ -85,11 +54,10 @@
                         <div class="col-lg-12">
                             <div class="cart-shiping-update-wrapper">
                                 <div class="cart-shiping-update">
-                                    <a href="#">Continue Shopping</a>
+                                    <a routerLink="/product">Tiếp tục mua hàng</a>
                                 </div>
                                 <div class="cart-clear">
-                                    <button>Update Cart</button>
-                                    <a href="#">Clear Cart</a>
+                                    <a (click)="clearCart()">Xóa tất cả</a>
                                 </div>
                             </div>
                         </div>
@@ -101,14 +69,18 @@
                         <div class="title-wrap">
                             <h4 class="cart-bottom-title section-bg-gary-cart">Cart Total</h4>
                         </div>
-                        <h5>Số lượng <span>$260.00</span></h5>
-                        <h5>Tổng tiền <span>$260.00</span></h5>
+                        <h5>Số lượng <span>{{totalQty}}</span></h5>
+                        <h5>Tổng tiền <span>{{totalMoney|currency:"VND"}}</span></h5>
                         
-                        <h4 class="grand-totall-title">Tổng thanh toán <span>$260.00</span></h4>
+                        <h4 class="grand-totall-title">Tổng thanh toán <span>{{totalMoney|currency:"VND"}}</span></h4>
                         <a routerLink="/customer/checkout">Proceed to Checkout</a>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="container" *ngIf="items.length<=0">
+        <h2  style="font-family: 'Montserrat', sans-serif; text-align: center;">Giỏ hàng trống. <a routerLink="/product" style="color: red;">Tiếp tục mua hàng</a></h2>
+
     </div>
 </div>

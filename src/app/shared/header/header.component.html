@@ -69,36 +69,36 @@
                                                     <li>
                                                         <a class="dropdown-title"  style="font-family: 'Montserrat', sans-serif;">Loại sản phẩm</a>
                                                         <ul *ngFor="let cate of categories">
-                                                            <li><a routerLink="/" style="font-family: 'Montserrat', sans-serif; margin: 10px 0 20px 0;">{{cate.productCategoryName}}</a></li>
+                                                            <li><a routerLink="/product/{{cate.productCategoryId}}" style="font-family: 'Montserrat', sans-serif; margin: 10px 0 20px 0;">{{cate.productCategoryName}}</a></li>
                                                         </ul>
                                                     </li>
                                                     <li>
                                                         <a class="dropdown-title"  style="font-family: 'Montserrat', sans-serif;">Thương hiệu</a>
                                                         <ul *ngFor="let supp of suppliers">
-                                                            <li><a routerLink="/" style="font-family: 'Montserrat', sans-serif; margin: 10px 0 20px 0;">{{supp.supplierName}}</a></li>
+                                                            <li><a routerLink="/product/{{supp.supplierId}}" style="font-family: 'Montserrat', sans-serif; margin: 10px 0 20px 0;">{{supp.supplierName}}</a></li>
                                                         </ul>
                                                     </li>
                                                 </ul>
                                             </li>
                                         </ul>
                                     </li>
-                                    <li><a href="#">PAGES </a>
+                                    <li><a  style="font-family: 'Montserrat', sans-serif;">TRANG</a>
                                         <ul class="sub-menu-style">
-                                            <li><a href="about-us.html">about us </a></li>
-                                            <li><a routerLink = "/customer/list-cart">cart page</a></li>
-                                            <li><a routerLink = "/customer/checkout">checkout </a></li>
-                                            <li><a routerLink = "/customer">my account</a></li>
-                                            <li><a routerLink = "/product/wishlist">wishlist </a></li>
+                                            <li><a href="about-us.html" style="font-family: 'Montserrat', sans-serif;">Giới thiệu</a></li>
+                                            <li><a routerLink = "/customer/list-cart" style="font-family: 'Montserrat', sans-serif;">Giỏ hàng</a></li>
+                                            <li><a routerLink = "/customer/checkout" style="font-family: 'Montserrat', sans-serif;">Thanh toán</a></li>
+                                            <li><a routerLink = "/customer" style="font-family: 'Montserrat', sans-serif;">Tài khoản</a></li>
+                                            <li><a routerLink = "/product/wishlist" style="font-family: 'Montserrat', sans-serif;">Danh sách yêu thích</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="blog.html">BLOG </a>
+                                    <!-- <li><a href="blog.html">BLOG </a>
                                         <ul class="sub-menu-style">
                                             <li><a href="blog.html">blog standard </a></li>
                                             <li><a href="blog-no-sidebar.html">blog no sidebar </a></li>
                                             <li><a href="blog-right-sidebar.html">blog right sidebar</a></li>
                                             <li><a href="blog-details.html">blog details</a></li>
                                         </ul>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </nav>
                         </div>
@@ -106,7 +106,7 @@
                     <div class="col-xl-2 col-lg-3">
                         <div class="header-action header-action-flex header-action-mrg-right">
                             <div class="same-style-2 header-search-1">
-                                <a class="search-toggle" href="#">
+                                <a class="search-toggle" >
                                     <i class="icon-magnifier s-open"></i>
                                     <i class="icon_close s-close"></i>
                                 </a>
@@ -124,8 +124,8 @@
                                 <a routerLink="/product/wishlist"><i class="icon-heart"></i><span class="pro-count red">03</span></a>
                             </div>
                             <div class="same-style-2 header-cart">
-                                <a class="cart-active" href="#">
-                                    <i class="icon-basket-loaded"></i><span class="pro-count red">02</span>
+                                <a class="cart-active" href="" >
+                                    <i class="icon-basket-loaded"></i><span class="pro-count red" *ngIf="totalQty>0">{{totalQty}}</span>
                                 </a>
                             </div>
                         </div>
@@ -156,7 +156,7 @@
                             </a>
                         </div>
                         <div class="same-style-2 main-menu-icon">
-                            <a class="mobile-header-button-active" href="#"><i class="icon-menu"></i> </a>
+                            <a class="mobile-header-button-active" href="#"><i class="icon-menu">{{totalQty}}</i> </a>
                         </div>
                     </div>
                 </div>
@@ -293,38 +293,26 @@
 </div>
 <!-- mini cart start -->
 <div class="sidebar-cart-active">
-    <div class="sidebar-cart-all">
+    <div class="sidebar-cart-all"  style="max-height: 500px">
         <a class="cart-close" ><i class="icon_close"></i></a>
-        <div class="cart-content">
+        <div class="cart-content" >
             <h3>Shopping Cart</h3>
-            <ul>
+            <ul *ngFor="let item of items">
                 <li class="single-product-cart">
                     <div class="cart-img">
-                        <a href="#"><img src="assets/images/cart/cart-1.jpg" alt=""></a>
+                        <a href="#"><img src="assets/images/product/{{item.productImage}}" alt=""></a>
                     </div>
                     <div class="cart-title">
-                        <h4><a href="#">Simple Black T-Shirt</a></h4>
-                        <span> 1 × $49.00	</span>
+                        <h4><a href="#">{{item.productName}}</a></h4>
+                        <span> {{item.quantity}} × {{item.productPrice|currency:"VND"}}	</span>
                     </div>
-                    <div class="cart-delete">
-                        <a href="#">×</a>
-                    </div>
-                </li>
-                <li class="single-product-cart">
-                    <div class="cart-img">
-                        <a href="#"><img src="assets/images/cart/cart-2.jpg" alt=""></a>
-                    </div>
-                    <div class="cart-title">
-                        <h4><a href="#">Norda Backpack</a></h4>
-                        <span> 1 × $49.00	</span>
-                    </div>
-                    <div class="cart-delete">
-                        <a href="#">×</a>
+                    <div class="cart-delete" >
+                        <a (click)="clearItemCart(item.productId)"><i class="icon_close"></i></a>
                     </div>
                 </li>
             </ul>
             <div class="cart-total">
-                <h4>Subtotal: <span>$170.00</span></h4>
+                <h4>Tổng thanh toán: <span>{{totalMoney|currency:"VND"}}</span></h4>
             </div>
             <div class="cart-checkout-btn">
                 <a class="btn-hover cart-btn-style" routerLink="/customer/list-cart">view cart</a>

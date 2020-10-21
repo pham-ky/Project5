@@ -4,7 +4,7 @@ import { CategoryService } from '../../lib/category.service';
 import { SupplierService } from '../../lib/supplier.service';
 import { first } from 'rxjs/operators';
 import { BaseComponent } from 'src/app/lib/base-component';
-
+declare let alertify: any;
 
 @Component({
   selector: 'app-header',
@@ -12,15 +12,18 @@ import { BaseComponent } from 'src/app/lib/base-component';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent extends BaseComponent implements OnInit {
-
+  items: any;
+  total: any;
   constructor(private categoryService: CategoryService,
     private supplierService: SupplierService,
-    injector: Injector) 
-  {
-      super(injector);
+    injector: Injector) {
+    super(injector);
   }
   categories: any;
   suppliers: any;
+  numb: any;
+  totalQty = 0;
+  totalMoney = 0;
   ngOnInit(): void {
     this.categoryService
       .Get()
@@ -37,6 +40,30 @@ export class HeaderComponent extends BaseComponent implements OnInit {
         // console.log(suppliers);
         this.suppliers = suppliers;
       });
-  }
 
+    this._cart.items.subscribe((res) => {
+      this.items = res;
+      this.total = 0;
+
+      this.totalQty = 0;
+      this.totalMoney = 0;
+      for (let x of this.items) {
+        x.money = x.quantity * x.productPrice;
+        this.total += x.quantity * x.productPrice;
+        this.totalQty += Number.parseInt(x.quantity);
+        console.log(this.totalQty);
+
+        this.totalMoney += Number.parseInt(x.money);
+      }
+    });
+
+    // this._cart.numberOfItems()
+    // ((numb)=>{
+    //   this.numb = numb;
+    // })
+  }
+  clearItemCart(id) {
+    this._cart.deleteItem(id);
+    alertify.success('Xóa thành công');
+  }
 }
