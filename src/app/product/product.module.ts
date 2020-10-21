@@ -9,7 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 export const prodRoute: Routes = [
   {
-    path: '',
+    path: ':id',
     component: ListComponent,
   },
   {

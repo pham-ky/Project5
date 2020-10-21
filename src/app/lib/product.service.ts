@@ -22,4 +22,8 @@ export class ProductService {
     const url = `${this.API_URL}/GetProduct/${id}`;
     return this.http.get(url);
   }
+  GetProdBy(id){
+    const url=`${this.API_URL}/GetProducts/${id}`;
+    return this.http.get(url);
+  }
 }

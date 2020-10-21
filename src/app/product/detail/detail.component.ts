@@ -25,7 +25,7 @@ export class DetailComponent extends BaseComponent implements OnInit, AfterViewI
   ngOnInit() {
     this.activatedRoute.paramMap
       .pipe(
-        first(),
+        // first(),
         map((params) => params.get('id')),
         switchMap((id) => this.productService.GetId(id))
       )
