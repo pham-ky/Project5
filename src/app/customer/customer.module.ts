@@ -7,6 +7,9 @@ import { OrderComponent } from './order/order.component';
 import { UserComponent } from './user/user.component';
 import { RouterModule, Routes } from '@angular/router';
 import { WishlistComponent } from '../product/wishlist/wishlist.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { from } from 'rxjs';
+import { AuthGuard } from '../lib/auth.guard';
 
 export const userdRoute: Routes = [
   {
@@ -28,6 +31,7 @@ export const userdRoute: Routes = [
   {
     path: 'checkout',
     component: CheckoutComponent,
+    canActivate: [AuthGuard],
   },
 ];
 
@@ -37,6 +41,9 @@ export const userdRoute: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(userdRoute),
+    // NgModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class CustomerModule { }

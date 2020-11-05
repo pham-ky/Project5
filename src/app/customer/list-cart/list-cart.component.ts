@@ -1,5 +1,6 @@
 import { BaseComponent } from '../../lib/base-component';
 import { Component, Injector, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 declare let alertify: any;
 @Component({
   selector: 'app-list-cart',
@@ -13,7 +14,8 @@ export class ListCartComponent extends BaseComponent implements OnInit {
   // total:any;
   totalQty: any;
   totalMoney: any;
-  constructor(injector: Injector) { 
+  constructor(private router:Router,
+    injector: Injector) { 
     super(injector);
   }
   ngOnInit(): void {
@@ -35,6 +37,9 @@ export class ListCartComponent extends BaseComponent implements OnInit {
   clearCart() { 
     this._cart.clearCart();
     alertify.success('Xóa thành công');
+    setTimeout(() => {
+      this.router.navigateByUrl('/');
+    }, 1000);
   }
   addQty(item, quantity){ 
     item.quantity =  quantity;

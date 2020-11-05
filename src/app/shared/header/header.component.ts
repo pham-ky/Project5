@@ -4,6 +4,8 @@ import { CategoryService } from '../../lib/category.service';
 import { SupplierService } from '../../lib/supplier.service';
 import { first } from 'rxjs/operators';
 import { BaseComponent } from 'src/app/lib/base-component';
+import { UserService } from '../../lib/user.service';
+import { Router } from '@angular/router';
 declare let alertify: any;
 
 @Component({
@@ -14,8 +16,11 @@ declare let alertify: any;
 export class HeaderComponent extends BaseComponent implements OnInit {
   items: any;
   total: any;
+  user: any;
   constructor(private categoryService: CategoryService,
     private supplierService: SupplierService,
+    private _user: UserService,
+    private router: Router,
     injector: Injector) {
     super(injector);
   }
@@ -57,13 +62,27 @@ export class HeaderComponent extends BaseComponent implements OnInit {
       }
     });
 
-    // this._cart.numberOfItems()
-    // ((numb)=>{
-    //   this.numb = numb;
-    // })
+    // this.user = window.localStorage.getItem("user");
+    // console.log(this.user);
+    
+
+    // this.user = this._user.userValue;
+    // console.log(this.user.userId);
+
+    this._user.user$.subscribe((res)=> {
+        this.user = res;
+        
+      })
+    
   }
   clearItemCart(id) {
     this._cart.deleteItem(id);
     alertify.success('Xóa thành công');
+  }
+  logout(){
+    this._user.logout();
+    setTimeout(() => {
+      this.router.navigateByUrl('/customer/login');
+    }, 1000);
   }
 }

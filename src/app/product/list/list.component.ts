@@ -41,7 +41,8 @@ export class ListComponent extends BaseComponent implements OnInit {
 
     this._route.params.subscribe(params => {
       this.item_group_id = params['id'];
-      this.productService.post('/GetProducts', { page: this.page, pageSize: this.pageSize, item_group_id: this.item_group_id }).subscribe(res => {
+      this.productService.post('/GetProducts', { page: this.page, pageSize: this.pageSize, item_group_id: this.item_group_id })
+      .subscribe(res => {
         this.list = res.data;
         // console.log(this.list);
         
@@ -56,7 +57,7 @@ export class ListComponent extends BaseComponent implements OnInit {
         // console.log(categories);
         this.categories = categories;
       });
-      
+
     this.supplierService
       .GetSup()
       .pipe(first())
@@ -75,6 +76,7 @@ export class ListComponent extends BaseComponent implements OnInit {
       }, err => { });
     });
   }
+
 
   addToCart(it) {
     this._cart.addToCart(it);

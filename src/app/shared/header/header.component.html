@@ -117,14 +117,17 @@
                                     </form>
                                 </div>
                             </div>
-                            <div class="same-style-2">
-                                <a routerLink= "/customer/login"><i class="icon-user"></i></a>
+                            <div class="same-style-2" *ngIf="user.userId != null">
+                                <a (click)="logout()"><i class="icon-logout" title="{{user.userName}}"></i></a>
+                            </div>
+                            <div class="same-style-2" *ngIf="user.userId == null">
+                                <a routerLink="/customer/login"><i class="icon-login" title="Đăng nhập"></i></a>
                             </div>
                             <div class="same-style-2">
                                 <a routerLink="/product/wishlist"><i class="icon-heart"></i><span class="pro-count red">03</span></a>
                             </div>
                             <div class="same-style-2 header-cart">
-                                <a class="cart-active" href="" >
+                                <a class="cart-active">
                                     <i class="icon-basket-loaded"></i><span class="pro-count red" *ngIf="totalQty>0">{{totalQty}}</span>
                                 </a>
                             </div>
