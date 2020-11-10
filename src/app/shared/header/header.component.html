@@ -117,10 +117,10 @@
                                     </form>
                                 </div>
                             </div>
-                            <div class="same-style-2" *ngIf="user.userId != null">
+                            <div class="same-style-2" *ngIf="user!=null">
                                 <a (click)="logout()"><i class="icon-logout" title="{{user.userName}}"></i></a>
                             </div>
-                            <div class="same-style-2" *ngIf="user.userId == null">
+                            <div class="same-style-2" *ngIf="user == null">
                                 <a routerLink="/customer/login"><i class="icon-login" title="Đăng nhập"></i></a>
                             </div>
                             <div class="same-style-2">

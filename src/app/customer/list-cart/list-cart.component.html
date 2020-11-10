@@ -12,7 +12,11 @@
     </div>
 </div>
 <div class="cart-main-area pt-115 pb-120">
-    <div class="container" *ngIf="items.length>0">
+    
+    <div class="container" *ngIf="items==null">
+        <h2  style="font-family: 'Montserrat', sans-serif; text-align: center;">Giỏ hàng trống. <a routerLink="/product/all" style="color: red;">Tiếp tục mua hàng</a></h2>
+    </div>
+    <div class="container" *ngIf="items">
         <h3 class="cart-page-title">Your cart items</h3>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
@@ -78,9 +82,5 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container" *ngIf="items.length<=0">
-        <h2  style="font-family: 'Montserrat', sans-serif; text-align: center;">Giỏ hàng trống. <a routerLink="/product/all" style="color: red;">Tiếp tục mua hàng</a></h2>
-
     </div>
 </div>

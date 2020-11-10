@@ -6,7 +6,7 @@
                 <div class="shop-topbar-wrapper">
                     <div class="shop-topbar-left">
                         <div class="view-mode nav">
-                            <a class="active"  href="#shop-1" data-toggle="tab"><i class="icon-grid"></i></a>
+                            <a class="active" href="#shop-1" data-toggle="tab"><i class="icon-grid"></i></a>
                             <a href="#shop-2" data-toggle="tab"><i class="icon-menu"></i></a>
                         </div>
                         <!-- <p>Showing 1 - 20 of 30 results </p> -->
@@ -115,12 +115,14 @@
                     <div class="sidebar-widget mb-40">
                         <h4 class="sidebar-widget-title" style="font-family: 'Montserrat', sans-serif;">Tìm kiếm </h4>
                         <div class="sidebar-search">
-                            <form class="sidebar-search-form" action="#">
-                                <input type="text" placeholder="Tìm kiếm...">
+                            <div class="sidebar-search-form" >
+                                <input type="text" placeholder="Tìm kiếm..." [(ngModel)]="textkey">
                                 <button>
-                                    <i class="icon-magnifier"></i>
+                                    <a (click)="loadPage(1)">
+                                        <i class="icon-magnifier"></i>
+                                    </a>
                                 </button>
-                            </form>
+                            </div>
                         </div>
                     </div>
                     <div class="sidebar-widget shop-sidebar-border mb-35 pt-40">

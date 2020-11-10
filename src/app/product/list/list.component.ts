@@ -33,28 +33,26 @@ export class ListComponent extends BaseComponent implements OnInit {
   pageSize: any;
   totalItems: any;
   item_group_id: any;
+  textkey: string = '';
   ngOnInit(): void {
-    
+
     this.list = [];
     this.page = 1;
-    this.pageSize = 3;
+    this.pageSize = 6;
 
     this._route.params.subscribe(params => {
       this.item_group_id = params['id'];
-      this.productService.post('/GetProducts', { page: this.page, pageSize: this.pageSize, item_group_id: this.item_group_id })
-      .subscribe(res => {
-        this.list = res.data;
-        // console.log(this.list);
-        
-        this.totalItems = res.totalItems;
-      }, err => { });
+      this.productService.post('/GetProducts', { page: this.page, pageSize: this.pageSize, item_group_id: this.item_group_id, textkey: this.textkey })
+        .subscribe(res => {
+          this.list = res.data;
+          this.totalItems = res.totalItems;
+        }, err => { });
     });
 
     this.categoryService
       .Get()
       .pipe(first())
       .subscribe((categories) => {
-        // console.log(categories);
         this.categories = categories;
       });
 
@@ -62,15 +60,16 @@ export class ListComponent extends BaseComponent implements OnInit {
       .GetSup()
       .pipe(first())
       .subscribe((suppliers) => {
-        // console.log(suppliers);
         this.suppliers = suppliers;
       });
   }
-      
+
   loadPage(page) {
+    console.log(this.textkey);
+
     this._route.params.subscribe(params => {
       let id = params['id'];
-      this.productService.post('/GetProducts', { page: this.page, pageSize: this.pageSize, item_group_id: this.item_group_id }).subscribe(res => {
+      this.productService.post('/GetProducts', { page: this.page, pageSize: this.pageSize, item_group_id: this.item_group_id, textkey: this.textkey }).subscribe(res => {
         this.list = res.data;
         this.totalItems = res.totalItems;
       }, err => { });

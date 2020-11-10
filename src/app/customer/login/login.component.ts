@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../lib/user.service';
 import { Router } from '@angular/router';
 
+declare let alertify: any;
 import {
   FormBuilder,
   FormGroup,
@@ -51,10 +52,11 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (user) => {
           if (user == null) {
-            console.log("LOST");
+            alertify.error("Đăng nhập thất bại");
             
             this.clearFormLogin();
           } else {
+            alertify.success("Đăng nhập thành công");
             
             setTimeout(() => {
               this.router.navigateByUrl('/home');

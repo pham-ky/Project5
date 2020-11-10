@@ -26,7 +26,7 @@ user: any;
     | UrlTree {
         this.userService.user$.subscribe((res)=> {
             this.user = res;
-            console.log(this.user.userId);
+            // console.log(this.user.userId);
             
           })
     // const user = this.userService.userValue;

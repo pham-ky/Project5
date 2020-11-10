@@ -6,6 +6,8 @@ import { CheckoutService } from '../../lib/checkout.service';
 import { UserService } from '../../lib/user.service';
 import { from } from 'rxjs';
 
+declare let alertify: any;
+
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -56,13 +58,15 @@ export class CheckoutComponent extends BaseComponent implements OnInit {
   }
 
   checkout(): void {
+    // debugger;
     var order = {
-      orderName: this.fullname,
-      orderAddress: this.address,
-      orderPhone: this.phone,
-      orderNote: this.note,
-      totalMoney: this.totalMoney,
-      orderDetails: JSON.stringify(this.items),
+      OrderUserId: this.user.userId,
+      OrderNameOfConsignee: this.fullname,
+      OrderAddress: this.address,
+      OrderPhone: this.phone,
+      OrderNote: (this.note!="")? this.note: "",
+      OrderTotalPrice: this.totalMoney,
+      OrderDetails: JSON.stringify(this.items),
     };
     this.checkoutService
       .checkout(order)
@@ -71,11 +75,7 @@ export class CheckoutComponent extends BaseComponent implements OnInit {
         console.log(res);
         if (res > 0) {
           this._cart.clearCart();
-          // this.messageService.add({
-          //   severity: 'success',
-          //   summary: 'Thông báo',
-          //   detail: 'Đặt hàng thành công',
-          // });
+          alertify.success("Đặt hàng thành công");
           setTimeout(() => {
             this.router.navigateByUrl('/home');
           }, 800);

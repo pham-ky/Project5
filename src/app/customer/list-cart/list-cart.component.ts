@@ -37,9 +37,6 @@ export class ListCartComponent extends BaseComponent implements OnInit {
   clearCart() { 
     this._cart.clearCart();
     alertify.success('Xóa thành công');
-    setTimeout(() => {
-      this.router.navigateByUrl('/');
-    }, 1000);
   }
   addQty(item, quantity){ 
     item.quantity =  quantity;

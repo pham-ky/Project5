@@ -56,7 +56,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
         x.money = x.quantity * x.productPrice;
         this.total += x.quantity * x.productPrice;
         this.totalQty += Number.parseInt(x.quantity);
-        console.log(this.totalQty);
+        // console.log(this.totalQty);
 
         this.totalMoney += Number.parseInt(x.money);
       }
@@ -81,6 +81,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   }
   logout(){
     this._user.logout();
+    alertify.success("Đăng xuất thành công");
     setTimeout(() => {
       this.router.navigateByUrl('/customer/login');
     }, 1000);
